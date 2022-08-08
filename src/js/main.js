@@ -127,5 +127,38 @@ const trigger = document.querySelectorAll('.btn');
     }
   })
   const timeOut = setTimeout(showModal, 10000);
-     
+
+/* карточки */
+class Card {
+  constructor(src, alt, title, descr, price ){
+  this.src = src,
+  this.alt = alt,
+  this.title = title,
+  this.descr = descr,
+  this.wrapper = document.querySelector('.menu__field >.container'),
+  this.price = price
+  }
+  render(){
+    const div = document.createElement('div');
+          div.classList.add('menu__item');
+          div.innerHTML=` <img src=${this.src} alt=${this.alt}>
+          <h3 class="menu__item-subtitle">Меню ${this.title}</h3>
+          <div class="menu__item-descr">${this.descr}</div>
+          <div class="menu__item-divider"></div>
+          <div class="menu__item-price">
+              <div class="menu__item-cost">Цена:</div>
+              <div class="menu__item-total"><span>${this.price}</span> грн/день</div>
+          </div>
+          `
+    this.wrapper.append(div)
+  }
+}
+const card1 = new Card("img/tabs/vegy.jpg","vegy","Фитнес", 'Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!','229');
+card1.render();
+
+const card2 = new Card("img/tabs/elite.jpg","elite","Премиум",'В меню “Премиум” мы используем не только красивый дизайн упаковки, но и качественное исполнение блюд. Красная рыба, морепродукты, фрукты - ресторанное меню без похода в ресторан!','550');
+card2.render();
+
+const card3 = new Card("img/tabs/post.jpg","post","Постное",'Меню “Постное” - это тщательный подбор ингредиентов: полное отсутствие продуктов животного происхождения, молоко из миндаля, овса, кокоса или гречки, правильное количество белков за счет тофу и импортных вегетарианских стейков.','430');
+card3.render();
 })
