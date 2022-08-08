@@ -154,11 +154,21 @@ class Card {
     this.wrapper.append(div)
   }
 }
-new Card("img/tabs/vegy.jpg","vegy","Фитнес", 'Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!',5, 28).render();
+async function getCard(url) {
+  const res = await fetch(url)
+  if (!res.ok) {
+    throw new Error(`Error in path ${url} ${res.status}`)
+  }else{
+    return await res.json()
+  } 
+}
+getCard('http://localhost:3000/cardInfoGet')
+.then((data)=>{
+  data.forEach(({src,alt,title,descr,price,curs})=>{
+    new Card(src,alt, title, descr, price,curs ).render();
+  })
+})
 
-new Card("img/tabs/elite.jpg","elite","Премиум",'В меню “Премиум” мы используем не только красивый дизайн упаковки, но и качественное исполнение блюд. Красная рыба, морепродукты, фрукты - ресторанное меню без похода в ресторан!',12, 28).render();
-
-new Card("img/tabs/post.jpg","post","Постное",'Меню “Постное” - это тщательный подбор ингредиентов: полное отсутствие продуктов животного происхождения, молоко из миндаля, овса, кокоса или гречки, правильное количество белков за счет тофу и импортных вегетарианских стейков.',8, 28).render();
 /* постинг данных с форм */
 
 const form = document.querySelector('.modal-form');
