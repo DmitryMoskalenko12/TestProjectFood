@@ -87,7 +87,7 @@ window.addEventListener('DOMContentLoaded', ()=>{
 
 /* модальные окна  */ 
 
-const trigger = document.querySelectorAll('.btn');
+const trigger = document.querySelectorAll('[data-btn]');
       close = document.querySelector('.modal__close');
       modal = document.querySelector('.modal');
 
@@ -130,13 +130,14 @@ const trigger = document.querySelectorAll('.btn');
 
 /* карточки */
 class Card {
-  constructor(src, alt, title, descr, price ){
+  constructor(src, alt, title, descr, price, curs ){
   this.src = src,
   this.alt = alt,
   this.title = title,
   this.descr = descr,
+  this.curs = curs,
   this.wrapper = document.querySelector('.menu__field >.container'),
-  this.price = price
+  this.price = price * this.curs
   }
   render(){
     const div = document.createElement('div');
@@ -147,18 +148,54 @@ class Card {
           <div class="menu__item-divider"></div>
           <div class="menu__item-price">
               <div class="menu__item-cost">Цена:</div>
-              <div class="menu__item-total"><span>${this.price}</span> грн/день</div>
+              <div class="menu__item-total"><span>${this.price.toFixed(0)}</span> грн/день</div>
           </div>
           `
     this.wrapper.append(div)
   }
 }
-const card1 = new Card("img/tabs/vegy.jpg","vegy","Фитнес", 'Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!','229');
-card1.render();
+new Card("img/tabs/vegy.jpg","vegy","Фитнес", 'Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!',5, 28).render();
 
-const card2 = new Card("img/tabs/elite.jpg","elite","Премиум",'В меню “Премиум” мы используем не только красивый дизайн упаковки, но и качественное исполнение блюд. Красная рыба, морепродукты, фрукты - ресторанное меню без похода в ресторан!','550');
-card2.render();
+new Card("img/tabs/elite.jpg","elite","Премиум",'В меню “Премиум” мы используем не только красивый дизайн упаковки, но и качественное исполнение блюд. Красная рыба, морепродукты, фрукты - ресторанное меню без похода в ресторан!',12, 28).render();
 
-const card3 = new Card("img/tabs/post.jpg","post","Постное",'Меню “Постное” - это тщательный подбор ингредиентов: полное отсутствие продуктов животного происхождения, молоко из миндаля, овса, кокоса или гречки, правильное количество белков за счет тофу и импортных вегетарианских стейков.','430');
-card3.render();
+new Card("img/tabs/post.jpg","post","Постное",'Меню “Постное” - это тщательный подбор ингредиентов: полное отсутствие продуктов животного происхождения, молоко из миндаля, овса, кокоса или гречки, правильное количество белков за счет тофу и импортных вегетарианских стейков.',8, 28).render();
+/* постинг данных с форм */
+
+const form = document.querySelector('.modal-form');
+const formOrder = document.querySelector('.order__form');
+const sanksWrapper = document.querySelector('.modal__content')
+function bindForm(selector) {
+  selector.addEventListener('submit',(e)=>{
+    e.preventDefault()
+    async function postData(url, data) {
+      let res = await fetch(url, {
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json'
+      },
+      body: data});
+      return await res.json()
+    }
+
+    const formData = new FormData(selector);
+    const json = JSON.stringify(Object.fromEntries(formData.entries()))
+    postData('http://localhost:3000/postInfo', json)
+    .then(
+      selector.reset(),
+      setTimeout(closeModal, 2000), 
+      s = document.createElement('div'),
+      s.classList.add('modal__title'),
+      s.textContent ='Спасибо мы скоро свяжемся с вами',
+      sanksWrapper.append(s),
+      setTimeout(()=>{
+        s.remove()
+      }, 1500)
+    ) 
+  })
+}
+bindForm(formOrder);
+bindForm(form);
+
+
+
 })
