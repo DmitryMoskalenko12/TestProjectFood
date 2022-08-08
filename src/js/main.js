@@ -126,7 +126,7 @@ const trigger = document.querySelectorAll('[data-btn]');
       closeModal()
     }
   })
-  const timeOut = setTimeout(showModal, 10000);
+  const timeOut = setTimeout(showModal, 300000);
 
 /* карточки */
 class Card {
