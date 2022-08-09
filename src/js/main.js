@@ -173,7 +173,9 @@ getCard('http://localhost:3000/cardInfoGet')
 
 const form = document.querySelector('.modal-form');
 const formOrder = document.querySelector('.order__form');
-const sanksWrapper = document.querySelector('.modal__content')
+const sanksWrapper = document.querySelector('.modal-thanks');
+const modalError = document.querySelector('.modal-error');
+
 function bindForm(selector) {
   selector.addEventListener('submit',(e)=>{
     e.preventDefault()
@@ -190,22 +192,81 @@ function bindForm(selector) {
     const formData = new FormData(selector);
     const json = JSON.stringify(Object.fromEntries(formData.entries()))
     postData('http://localhost:3000/postInfo', json)
-    .then(
-      selector.reset(),
-      setTimeout(closeModal, 2000), 
-      s = document.createElement('div'),
-      s.classList.add('modal__title'),
-      s.textContent ='Спасибо мы скоро свяжемся с вами',
-      sanksWrapper.append(s),
+    .then(()=>{
+      setTimeout(closeModal, 500), 
+      setTimeout(() => {
+        sanksWrapper.style.display = 'block';
+      }, 1000),
       setTimeout(()=>{
-        s.remove()
-      }, 1500)
+        sanksWrapper.style.display ='none';
+      }, 4000)
+    }
+    ).catch(()=>{
+      closeModal(), 
+      modalError.style.display = 'block',
+      setTimeout(()=>{
+        modalError.style.display ='none';
+      }, 4000)
+    }).finally(
+      selector.reset()
     ) 
   })
 }
 bindForm(formOrder);
 bindForm(form);
 
+/* слайдер */
 
+const wrapperSlides = document.querySelector('.offer__slider-wrapper');
+      slides = document.querySelectorAll('.offer__slide');
+      prev = document.querySelector('.offer__slider-prev');
+      next = document.querySelector('.offer__slider-next');
+      current = document.querySelector('#current');
+      total = document.querySelector('#total');
 
+      let slidesIndex = 1;
+      if (slides.length > 10) {
+        total.textContent = slides.length
+      }
+      if (slides.length < 10) {
+        total.textContent = `0${slides.length}`
+      }
+      initSlides(slidesIndex)
+
+     function initSlides(n) {
+      if (n > slides.length) {
+        slidesIndex = 1
+      }
+      if (n < 1) {
+        slidesIndex = slides.length
+      }
+
+      slides.forEach((item)=>{
+        item.style.display = 'none';
+      })
+
+      slides[slidesIndex - 1].style.display ='block';
+
+      if (slides.length > 10) {
+        current.textContent = slidesIndex
+      }
+      if (slidesIndex < 10) {
+        current.textContent = `0${slidesIndex}`
+      }
+      
+     } 
+
+     function countSlides (num) {
+      initSlides(slidesIndex += num)
+     }
+
+    prev.addEventListener('click', ()=>{
+      countSlides(-1)
+    });
+
+    next.addEventListener('click', ()=>{
+      countSlides(1)
+    })
+   
+     
 })
