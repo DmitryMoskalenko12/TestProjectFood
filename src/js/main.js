@@ -218,13 +218,78 @@ bindForm(form);
 /* слайдер */
 
 const wrapperSlides = document.querySelector('.offer__slider-wrapper');
+      slidesField = document.querySelector('.slider-field');
       slides = document.querySelectorAll('.offer__slide');
       prev = document.querySelector('.offer__slider-prev');
       next = document.querySelector('.offer__slider-next');
       current = document.querySelector('#current');
       total = document.querySelector('#total');
+      width = window.getComputedStyle(wrapperSlides).width;
+      let offset = 0;
+      let slideIndex = 1;
 
-      let slidesIndex = 1;
+      if (slides.length < 10) {
+        total.textContent = `0${slides.length}`;
+        current.textContent = `0${slideIndex}`
+      }else{
+        total.textContent = slides.length;
+        current.textContent = slideIndex
+      }
+
+      slides.forEach(item=>{
+        item.style.width = width;
+      })
+      slidesField.style.display = 'flex',
+      slidesField.style.width = 100 * slides.length + '%',
+      slidesField.style.transition = '0.7s all',
+      wrapperSlides.style.overflow = 'hidden'  
+  
+      next.addEventListener('click', ()=>{
+        if (offset == +width.replace(/\D/gi, '') * (slides.length - 1)) {
+          offset = 0
+        }else{
+          offset += +width.replace(/\D/gi, ''); 
+        }
+        
+          slidesField.style.transform =`translateX(-${offset}px)`;
+
+          if (slideIndex == slides.length) {
+            slideIndex = 1;
+          }else{
+            slideIndex++;
+          }
+
+          if (slides.length < 10) {
+            current.textContent = `0${slideIndex}`;
+          }else{
+            current.textContent = slideIndex;
+          }
+      })
+
+      prev.addEventListener('click', ()=>{
+        if (offset == 0) {
+          offset = +width.replace(/\D/gi, '') * (slides.length - 1)
+        }else{
+          offset -= +width.replace(/\D/gi, '');
+        }
+        
+          slidesField.style.transform =`translateX(-${offset}px)`;
+
+          if (slideIndex == 1) {
+            slideIndex = slides.length;
+          }else{
+            slideIndex--;
+          }
+
+          if (slides.length < 10) {
+            current.textContent = `0${slideIndex}`;
+          }else{
+            current.textContent = slideIndex;
+          }
+      })
+      
+
+     /*  let slidesIndex = 1;
       if (slides.length > 10) {
         total.textContent = slides.length
       }
@@ -267,6 +332,10 @@ const wrapperSlides = document.querySelector('.offer__slider-wrapper');
     next.addEventListener('click', ()=>{
       countSlides(1)
     })
-   
+    */
      
 })
+
+
+
+
