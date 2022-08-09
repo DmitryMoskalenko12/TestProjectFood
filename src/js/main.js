@@ -264,6 +264,12 @@ const wrapperSlides = document.querySelector('.offer__slider-wrapper');
           }else{
             current.textContent = slideIndex;
           }
+
+          dotss.forEach((item, i)=>{
+            item.style.opacity='0.5'
+         });
+         dotss[slideIndex - 1].style.opacity = '1';
+
       })
 
       prev.addEventListener('click', ()=>{
@@ -286,6 +292,12 @@ const wrapperSlides = document.querySelector('.offer__slider-wrapper');
           }else{
             current.textContent = slideIndex;
           }
+
+          dotss.forEach((item, i)=>{
+            item.style.opacity='0.5'
+         });
+         dotss[slideIndex - 1].style.opacity = '1';
+
       })
       
 
@@ -333,7 +345,71 @@ const wrapperSlides = document.querySelector('.offer__slider-wrapper');
       countSlides(1)
     })
     */
-     
+     const carousel = document.createElement('div');
+     carousel.classList.add('carousel-indicators');
+     carousel.style.cssText =`
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 15;
+      display: flex;
+      justify-content: center;
+      margin-right: 15%;
+      margin-left: 15%;
+      list-style: none;`
+      wrapperSlides.append(carousel);
+
+      const dotss = [];
+
+      for (let i = 0; i < slides.length; i++) {
+      const dots = document.createElement('div');
+      dots.setAttribute('data-slide-to', i + 1)
+      dots.style.cssText =`
+        box-sizing: content-box;
+        flex: 0 1 auto;
+        width: 30px;
+        height: 6px;
+        margin-right: 3px;
+        margin-left: 3px;
+        cursor: pointer;
+        background-color: #fff;
+        background-clip: padding-box;
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+        opacity: .5;
+        transition: opacity .6s ease;`;
+
+        document.querySelector('.carousel-indicators').append(dots);
+        if (i == 0) {
+          dots.style.opacity='1'
+        }
+        dotss.push(dots)
+      }  
+      
+      dotss.forEach((item, i)=>{
+        item.addEventListener('click', (e)=>{
+          const dotSlide = e.target.getAttribute('data-slide-to')
+          slideIndex = dotSlide;
+          offset = +width.replace(/\D/gi, '') * (dotSlide - 1)
+          
+            
+            slidesField.style.transform =`translateX(-${offset}px)`;
+  
+            if (slides.length < 10) {
+              current.textContent = `0${slideIndex}`;
+            }else{
+              current.textContent = slideIndex;
+            }
+  
+            dotss.forEach((item, i)=>{
+              item.style.opacity='0.5'
+           });
+           dotss[slideIndex - 1].style.opacity = '1';
+        })
+      })
+      
+      
 })
 
 
