@@ -389,12 +389,10 @@ const wrapperSlides = document.querySelector('.offer__slider-wrapper');
       
       dotss.forEach((item, i)=>{
         item.addEventListener('click', (e)=>{
-          const dotSlide = e.target.getAttribute('data-slide-to')
+          const dotSlide = e.target.getAttribute('data-slide-to');
           slideIndex = dotSlide;
-          offset = +width.replace(/\D/gi, '') * (dotSlide - 1)
-          
-            
-            slidesField.style.transform =`translateX(-${offset}px)`;
+          offset = +width.replace(/\D/gi, '') * (dotSlide - 1);
+          slidesField.style.transform =`translateX(-${offset}px)`;
   
             if (slides.length < 10) {
               current.textContent = `0${slideIndex}`;
@@ -408,8 +406,98 @@ const wrapperSlides = document.querySelector('.offer__slider-wrapper');
            dotss[slideIndex - 1].style.opacity = '1';
         })
       })
-      
-      
+
+/* калькулятор */
+const result = document.querySelector('.calculating__result span');
+      gender = document.querySelectorAll('#gender  div');
+      activity = document.querySelectorAll('.calculating__choose_big  div');
+          
+let sex, height, weight, age, activ;
+
+function calcSum() {
+  if(!sex || !height || !weight  || !age  || !activ){
+   result.textContent = '______';
+   return;
+  }
+
+    if (sex === 'femail') {
+       result.textContent = Math.round((447.6 + (9.2 * weight) + (3.1 * height) - (4.3 * age)) * activ).toFixed(0) 
+    }else{
+      result.textContent = Math.round((88.36 + (13.4 * weight) + (4.8 * height) - (5.7 * age)) * activ).toFixed(0)
+    }
+ 
+}
+  calcSum();  
+  
+  function getInfo(parentclas, activeClass) {
+   /*  const elements = document.querySelectorAll(`${parentSelector} div`);
+    document.querySelector(parentSelector).addEventListener('click', (e)=>{
+      if (e.target.getAttribute('data-active') ) {
+        activ = +e.target.getAttribute('data-active');
+      }else{
+        sex = e.target.getAttribute('id');
+      }
+      elements.forEach((item, i)=>{
+        item.classList.remove(activeClass);
+      })
+      e.target.classList.add(activeClass);
+
+      calcSum()
+    }); */
+    parentclas.forEach(item=>{
+    item.addEventListener('click', (e)=>{
+    if (e.target.getAttribute('data-active') ) {
+      activ = +e.target.getAttribute('data-active');
+    }else{
+      sex = e.target.getAttribute('id');
+    }
+
+    parentclas.forEach((item, i)=>{
+      item.classList.remove(activeClass);
+    })
+    e.target.classList.add(activeClass);
+    calcSum()
+  })
+})
+
+parentclas.forEach((item, i)=>{
+  item.classList.remove(activeClass);
+})
+parentclas[0].classList.add(activeClass);
+
+}
+
+  getInfo(gender, 'calculating__choose-item_active');
+  getInfo(activity, 'calculating__choose-item_active'); 
+ 
+  /* getInfo('#gender', 'calculating__choose-item_active');
+  getInfo('.calculating__choose_big', 'calculating__choose-item_active'); */
+
+  function dinamicInfo(selector) {
+      const input = document.querySelector(selector);
+      input.addEventListener('input',()=>{
+        switch(input.getAttribute('id')) {
+          case 'height':
+            height = +input.value;
+            break;
+          case 'weight':
+            weight = +input.value;
+            break;
+          case 'age':
+            age = +input.value;
+            break;
+        }
+        calcSum() 
+  });
+  
+  }
+  
+  
+
+dinamicInfo('#height');
+dinamicInfo('#weight');
+dinamicInfo('#age');
+
 })
 
 
