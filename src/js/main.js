@@ -430,20 +430,7 @@ function calcSum() {
   calcSum();  
   
   function getInfo(parentclas, activeClass) {
-   /*  const elements = document.querySelectorAll(`${parentSelector} div`);
-    document.querySelector(parentSelector).addEventListener('click', (e)=>{
-      if (e.target.getAttribute('data-active') ) {
-        activ = +e.target.getAttribute('data-active');
-      }else{
-        sex = e.target.getAttribute('id');
-      }
-      elements.forEach((item, i)=>{
-        item.classList.remove(activeClass);
-      })
-      e.target.classList.add(activeClass);
 
-      calcSum()
-    }); */
     parentclas.forEach(item=>{
     item.addEventListener('click', (e)=>{
     if (e.target.getAttribute('data-active') ) {
@@ -467,11 +454,9 @@ parentclas[0].classList.add(activeClass);
 
 }
 
-  getInfo(gender, 'calculating__choose-item_active');
-  getInfo(activity, 'calculating__choose-item_active'); 
+getInfo(gender, 'calculating__choose-item_active');
+getInfo(activity, 'calculating__choose-item_active'); 
  
-  /* getInfo('#gender', 'calculating__choose-item_active');
-  getInfo('.calculating__choose_big', 'calculating__choose-item_active'); */
 
   function dinamicInfo(selector) {
       const input = document.querySelector(selector);
