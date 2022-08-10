@@ -147,7 +147,7 @@ class Card {
           <div class="menu__item-descr">${this.descr}</div>
           <div class="menu__item-divider"></div>
           <div class="menu__item-price">
-              <div class="menu__item-cost">Цена:</div>
+              <div class="menu__item-cost">Ціна:</div>
               <div class="menu__item-total"><span>${this.price.toFixed(0)}</span> грн/день</div>
           </div>
           `
@@ -497,8 +497,6 @@ parentclas[0].classList.add(activeClass);
   
   }
   
-  
-
 dinamicInfo('#height');
 dinamicInfo('#weight');
 dinamicInfo('#age');
