@@ -412,7 +412,7 @@ const result = document.querySelector('.calculating__result span');
       gender = document.querySelectorAll('#gender  div');
       activity = document.querySelectorAll('.calculating__choose_big  div');
           
-let sex, height, weight, age, activ;
+let sex='femail', height, weight, age, activ= 1.2;
 
 function calcSum() {
   if(!sex || !height || !weight  || !age  || !activ){
@@ -476,6 +476,11 @@ parentclas[0].classList.add(activeClass);
   function dinamicInfo(selector) {
       const input = document.querySelector(selector);
       input.addEventListener('input',()=>{
+        if(input.value.match(/\D/ig)){
+          input.style.border = '2px solid red'
+        }else{
+          input.style.border = 'none'
+        }
         switch(input.getAttribute('id')) {
           case 'height':
             height = +input.value;
