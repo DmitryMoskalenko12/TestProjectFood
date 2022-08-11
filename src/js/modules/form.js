@@ -6,10 +6,12 @@ const formOrder = document.querySelector('.order__form');
 const sanksWrapper = document.querySelector('.modal-thanks');
 const modalError = document.querySelector('.modal-error');
 
+
 const modal = document.querySelector('.modal');
 function closeModal() {
   modal.style.display = 'none';
-  document.body.style.overflow =''
+  document.body.style.overflow ='';
+  document.body.style.marginRight =`0px`;
 }
 
 function bindForm(selector) {

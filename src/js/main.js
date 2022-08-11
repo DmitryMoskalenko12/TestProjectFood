@@ -13,6 +13,7 @@ window.addEventListener('DOMContentLoaded', ()=>{
     modal.style.display = 'block';
     document.body.style.overflow ='hidden';
     clearInterval(timeOut);
+    document.body.style.marginRight=`${scroll1}px`;
   }
 
   tab();
