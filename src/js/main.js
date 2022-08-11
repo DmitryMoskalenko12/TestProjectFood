@@ -1,6 +1,29 @@
 'Use strict'
+import tab from './modules/tab';
+import calc from './modules/calc';
+import card from './modules/card';
+import form from './modules/form';
+import modal from './modules/modal';
+import slider from './modules/slider';
+import timer from './modules/timer';
+
 window.addEventListener('DOMContentLoaded', ()=>{
-  const tabWrapper = document.querySelector('.tabheader__items');
+
+  function showModal() {
+    modal.style.display = 'block';
+    document.body.style.overflow ='hidden';
+    clearInterval(timeOut);
+  }
+
+  tab();
+  timer();
+  modal();
+  card();
+  form();
+  slider();
+  calc();
+  
+/*   const tabWrapper = document.querySelector('.tabheader__items');
         tab = document.querySelectorAll('.tabheader__item');
         content = document.querySelectorAll('.tabcontent');
 
@@ -30,11 +53,11 @@ window.addEventListener('DOMContentLoaded', ()=>{
         }
       })
     }
-  })
+  }) */
 
 /* таймер */
 
-  const deadlain = '2022-08-25';
+ /*  const deadlain = '2022-08-25';
   
   function timeRemaining(timeEnd) {
     const t =  Date.parse(timeEnd) - Date.parse(new Date());
@@ -83,11 +106,11 @@ window.addEventListener('DOMContentLoaded', ()=>{
     }
   }
   }
-  setTime(deadlain)
+  setTime(deadlain) */
 
 /* модальные окна  */ 
 
-const trigger = document.querySelectorAll('[data-btn]');
+/* const trigger = document.querySelectorAll('[data-btn]');
       close = document.querySelector('.modal__close');
       modal = document.querySelector('.modal');
 
@@ -126,10 +149,10 @@ const trigger = document.querySelectorAll('[data-btn]');
       closeModal()
     }
   })
-  const timeOut = setTimeout(showModal, 300000);
+  const timeOut = setTimeout(showModal, 300000); */
 
 /* карточки */
-class Card {
+/* class Card {
   constructor(src, alt, title, descr, price, curs ){
   this.src = src,
   this.alt = alt,
@@ -167,11 +190,11 @@ getCard('http://localhost:3000/cardInfoGet')
   data.forEach(({src,alt,title,descr,price,curs})=>{
     new Card(src,alt, title, descr, price,curs ).render();
   })
-})
+}) */
 
 /* постинг данных с форм */
 
-const form = document.querySelector('.modal-form');
+/* const form = document.querySelector('.modal-form');
 const formOrder = document.querySelector('.order__form');
 const sanksWrapper = document.querySelector('.modal-thanks');
 const modalError = document.querySelector('.modal-error');
@@ -213,11 +236,11 @@ function bindForm(selector) {
   })
 }
 bindForm(formOrder);
-bindForm(form);
+bindForm(form); */
 
 /* слайдер */
 
-const wrapperSlides = document.querySelector('.offer__slider-wrapper');
+/* const wrapperSlides = document.querySelector('.offer__slider-wrapper');
       slidesField = document.querySelector('.slider-field');
       slides = document.querySelectorAll('.offer__slide');
       prev = document.querySelector('.offer__slider-prev');
@@ -298,7 +321,7 @@ const wrapperSlides = document.querySelector('.offer__slider-wrapper');
          });
          dotss[slideIndex - 1].style.opacity = '1';
 
-      })
+      }) */
       
 
      /*  let slidesIndex = 1;
@@ -345,7 +368,7 @@ const wrapperSlides = document.querySelector('.offer__slider-wrapper');
       countSlides(1)
     })
     */
-     const carousel = document.createElement('div');
+     /* const carousel = document.createElement('div');
      carousel.classList.add('carousel-indicators');
      carousel.style.cssText =`
       position: absolute;
@@ -406,9 +429,9 @@ const wrapperSlides = document.querySelector('.offer__slider-wrapper');
            dotss[slideIndex - 1].style.opacity = '1';
         })
       })
-
+ */
 /* калькулятор */
-const result = document.querySelector('.calculating__result span');
+/* const result = document.querySelector('.calculating__result span');
       gender = document.querySelectorAll('#gender  div');
       activity = document.querySelectorAll('.calculating__choose_big  div');
           
@@ -484,7 +507,7 @@ getInfo(activity, 'calculating__choose-item_active');
   
 dinamicInfo('#height');
 dinamicInfo('#weight');
-dinamicInfo('#age');
+dinamicInfo('#age'); */
 
 })
 
