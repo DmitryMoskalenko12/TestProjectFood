@@ -9,13 +9,6 @@ import timer from './modules/timer';
 
 window.addEventListener('DOMContentLoaded', ()=>{
 
-  function showModal() {
-    modal.style.display = 'block';
-    document.body.style.overflow ='hidden';
-    clearInterval(timeOut);
-    document.body.style.marginRight=`${scroll1}px`;
-  }
-
   tab();
   timer();
   modal();

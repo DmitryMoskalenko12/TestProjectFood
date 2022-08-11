@@ -5,7 +5,8 @@ const form = document.querySelector('.modal-form');
 const formOrder = document.querySelector('.order__form');
 const sanksWrapper = document.querySelector('.modal-thanks');
 const modalError = document.querySelector('.modal-error');
-
+const thanksClose = document.querySelector('.modal-thanks__close');
+const errorClose = document.querySelector('.modal-error__close');
 
 const modal = document.querySelector('.modal');
 function closeModal() {
@@ -50,6 +51,14 @@ function bindForm(selector) {
     ) 
   })
 }
+
+thanksClose.addEventListener('click', ()=>{
+  sanksWrapper.style.display ='none';
+})
+
+errorClose.addEventListener('click', ()=>{
+  modalError.style.display ='none';
+})
 bindForm(formOrder);
 bindForm(form);
 }
