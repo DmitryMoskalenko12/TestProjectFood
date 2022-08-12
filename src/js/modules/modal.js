@@ -4,7 +4,7 @@ const trigger = document.querySelectorAll('[data-btn]'),
       close = document.querySelector('.modal__close'),
       modal = document.querySelector('.modal'),
       scroll1 = scroll();
-
+   
 function showModal() {
   modal.style.display = 'block';
   document.body.style.overflow ='hidden';

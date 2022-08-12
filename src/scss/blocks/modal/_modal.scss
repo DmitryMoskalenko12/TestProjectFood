@@ -8,6 +8,8 @@
     height: 100%;
     overflow: hidden;
     background-color: rgba(0,0,0,.5);
+    animation-name: modal;
+    animation-duration: 2s;
     &__dialog {
         max-width: 500px;
         margin: 40px auto;
@@ -68,6 +70,8 @@
     height: 100%;
     overflow: hidden;
     background-color: rgba(0,0,0,.5);
+    animation-name: modal;
+    animation-duration: 2s;
       &__dialog{
         max-width: 500px;
         margin: 40px auto;
@@ -110,6 +114,8 @@
   height: 100%;
   overflow: hidden;
   background-color: rgba(0,0,0,.5);
+  animation-name: modal;
+  animation-duration: 2s;
     &__dialog{
       max-width: 500px;
       margin: 40px auto;
@@ -141,4 +147,12 @@
       font-size: 22px;
       text-transform: uppercase;
     }
+}
+@keyframes modal {
+  0%{
+  opacity: 0.2;
+  }
+  100%{
+    opacity: 1;
+  }
 }
